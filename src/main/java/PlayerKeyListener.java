@@ -21,7 +21,6 @@ public class PlayerKeyListener implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             this.player.setMovingLeft(true); //need to change it from being hard coded later
             this.gamePanel.repaint();
-            System.out.println("presd");
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             this.player.setMovingRight(true);

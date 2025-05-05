@@ -26,7 +26,6 @@ public class GamePanel extends BackgroundPanel{
 
     public boolean gameLost(){
         if(this.gameEngine.isPlayerOutOfBounds()){
-            System.out.println("game stop");
             this.gameEngine.stopGame();
             return true;
                     }
