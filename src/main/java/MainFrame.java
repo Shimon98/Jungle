@@ -51,6 +51,7 @@ public class MainFrame extends JFrame {
         new Thread(()->{
             try {
                 while (!this.gamePanel.gameLost()){
+                    System.out.print("");
 
                 }
                 System.out.println("endGAME");
