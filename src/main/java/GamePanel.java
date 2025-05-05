@@ -15,14 +15,33 @@ public class GamePanel extends BackgroundPanel{
         this.playerStartingX=(width/2)-Player.PLAYER_WIDTH/2;
         this.playerStartingY=(height/2)+Player.PLAYER_HEIGHT/2;
         this.player = new Player(this.playerStartingX,this.playerStartingY);
-        this.gameEngine = new GameEngine(this, this.player);
-        this.gameEngine.start();
+
         this.setFocusable(true);
         this.requestFocus();
         this.addKeyListener(new PlayerKeyListener(this.player, this));
 
 
+
     }
+
+    public boolean gameLost(){
+        if(this.gameEngine.isPlayerOutOfBounds()){
+            System.out.println("game stop");
+            this.gameEngine.stopGame();
+            return true;
+                    }
+        return false;
+
+    }
+
+    public void startGame(){
+        this.gameEngine = new GameEngine(this, this.player);
+        this.gameEngine.start();
+        this.gameEngine.startGame();
+    }
+
+
+
 
 
     @Override

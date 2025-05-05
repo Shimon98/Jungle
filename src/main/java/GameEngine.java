@@ -24,7 +24,7 @@ public class GameEngine extends Thread {
         this.middlePanel =gamePanel.getHeight()/2;
         this.player = player;
         this.platforms = new ArrayList<>();
-        this.running = true;
+        this.running = false;
         platformManager=new PlatformManager(gamePanel);
         this.platforms=platformManager.getPlatforms();
 
@@ -37,14 +37,14 @@ public class GameEngine extends Thread {
         Rectangle playerLegs = new Rectangle(
                 player1.getPlayerX(),
                  player1.getPlayerY()+player1.getPlayerHeight() - COLLISION_THRESHOLD,
-                player1.getPlayerWidth(), COLLISION_THRESHOLD);
+                player1.getPlayerWidth()-COLLISION_THRESHOLD, COLLISION_THRESHOLD);
 
         Rectangle platformHead = new Rectangle(
                 platform1.getPlatformX(),
                 platform1.getPlatformY()
-                , platform1.getWidth(), COLLISION_THRESHOLD);
+                , platform1.getWidth()-COLLISION_THRESHOLD, COLLISION_THRESHOLD);
         if (playerLegs.intersects(platformHead) && player1.getYSpeed() >= 0) {
-            System.out.println("Landed!");
+
 
             return true;
         } else {
@@ -56,7 +56,7 @@ public class GameEngine extends Thread {
     private void playerJumpIfNeeded(){
         for (Platform platform: this.platforms){
         if (isPlayerLanding(this.player,platform )) {
-            System.out.println("CHEK");
+
             this.player.jump();
         }
     }}
@@ -97,6 +97,8 @@ public class GameEngine extends Thread {
             this.platformManager.generatePlatformsIfNeeded();
             playerJumpIfNeeded();
             this.gamePanel.repaint();
+
+
             try {
 
                 this.sleep(SLEEP);
@@ -106,6 +108,15 @@ public class GameEngine extends Thread {
         }
     }
 
+    public boolean isPlayerOutOfBounds(){
+        if(this.player.getPlayerY()>=this.gamePanel.getHeight()){
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 
 
@@ -114,7 +125,10 @@ public class GameEngine extends Thread {
         return platforms;
     }
 
-    public void setRunning(boolean running) {
-        this.running = running;
+    public void stopGame() {
+        this.running = false;
+    }
+    public void startGame() {
+        this.running = true;
     }
 }

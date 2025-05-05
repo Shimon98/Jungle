@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Player  {
     public static final int PLAYER_HEIGHT = 80;
-    public static final int PLAYER_WIDTH = 80;
+    public static final int PLAYER_WIDTH = 75;
 
     public static final int JUMP_FORCE = -16;
     public static final int GRAVITY = 1;
@@ -21,7 +21,9 @@ public class Player  {
 
 
     private Image monkeyStandingImage;
-    private Image monkeyJumpingImage;
+    private Image monkeyJumpingLeftImage;
+    private Image monkeyJumpingRightImage;
+
 
     public Player(int startX,int startY) {
         this.playerX = startX;
@@ -34,8 +36,9 @@ public class Player  {
         this.movingRight = false;
         this.isJumping = true;
 
-        monkeyStandingImage = new ImageIcon(getClass().getResource("images/monkey_standing.jpg")).getImage();
-        monkeyJumpingImage = new ImageIcon(getClass().getResource("images/monkey_jumping.jpg")).getImage();
+        this.monkeyStandingImage = new ImageIcon(getClass().getResource("images/monkey_standing.png")).getImage();
+        this.monkeyJumpingLeftImage = new ImageIcon(getClass().getResource("images/monkey_jumping_left.png")).getImage();
+        this.monkeyJumpingRightImage = new ImageIcon(getClass().getResource("images/monkey_jumping_right.png")).getImage();
     }
 
     public void setMovingLeft(boolean moving) {
@@ -71,9 +74,12 @@ public class Player  {
 
     public void draw(Graphics graphics) {
         Image currentImage;
+
         if (this.isJumping) {
-            currentImage = monkeyJumpingImage;
-        } else {
+
+            currentImage = monkeyJumpingLeftImage;
+        }
+        else {
             currentImage = monkeyStandingImage;
         }
         graphics.drawImage(currentImage, this.playerX, this.playerY, this.playerWidth, this.playerHeight, null);

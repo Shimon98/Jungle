@@ -11,6 +11,9 @@ public class MainFrame extends JFrame {
 
     private CardLayout cardLayout;
     private Container container;
+    private Menu menu;
+    private GamePanel gamePanel;
+    private GameEndPanel gameEndPanel;
 
     public MainFrame() {
         this.setTitle("JUNGLE JUMP");
@@ -21,20 +24,45 @@ public class MainFrame extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.cardLayout = new CardLayout();
         this.setLayout(cardLayout);
-
         this.container = getContentPane();
         this.container.setLayout(this.cardLayout);
-
-        Menu menu = new Menu(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
-        this.container.add(menu, ScreenNames.MENU);
+        this.menu = new Menu(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
+        this.container.add(this.menu, ScreenNames.MENU);
         this.cardLayout.show(this.container, ScreenNames.MENU);
+        this.gamePanel = new GamePanel(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
+        this.container.add(this.gamePanel, ScreenNames.GAME);
+        this.gameEndPanel=new GameEndPanel(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        GamePanel gamePanel = new GamePanel(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
-        this.container.add(gamePanel, ScreenNames.GAME);
-
+        this.container.add(this.gameEndPanel,ScreenNames.END_GAME);
         menu.setStartButtonAction(e -> {
+            System.out.println("startPRAS");
+            this.gamePanel.startGame();// הסבר למה המשחק לא מתחיל שאני לוחץ על הכפתור
             this.cardLayout.show(this.container,ScreenNames.GAME);
-            gamePanel.requestFocusInWindow();// זה גורם לכך שהפאנל ידרוש פוקוס בתוך החלון שלו ללא זה המקשים לא יעבדו
+            gamePanel.requestFocusInWindow();
+            this.lostGame();
+
         });
+
+
+
     }
+
+    private void lostGame(){
+        new Thread(()->{
+            try {
+                while (!this.gamePanel.gameLost()){
+                    System.out.println();
+                }
+                System.out.println("endGAME");
+                this.cardLayout.show(this.container,ScreenNames.END_GAME);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }).start();
+
+
+    }
+
+
 }

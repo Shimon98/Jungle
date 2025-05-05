@@ -65,6 +65,7 @@ public class PlatformManager {
 
 
         this.platforms.removeAll(toRemove);
+        // אולי להשתמש בלינקד ליסט יוריד סיבוכיות
         this.generatePlatformsIfNeeded();
 
     }
