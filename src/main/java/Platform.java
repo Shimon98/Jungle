@@ -28,8 +28,9 @@ public class Platform  {
                 this.platformHeight, null);
     }
 
-
-
+    public void setPlatformImage(Image platformImage) {
+        this.platformImage = platformImage;
+    }
 
     public int getPlatformX() {
         return platformX;

@@ -10,6 +10,7 @@ public class PlatformManager {
     private List<Platform> platforms;
     private GamePanel gamePanel;
 
+
     public PlatformManager(GamePanel gamePanel) {
         this.platforms = new ArrayList<>();
         this.gamePanel = gamePanel;
@@ -30,7 +31,6 @@ public class PlatformManager {
             int highestX = random.nextInt(this.gamePanel.getWidth() - Platform.PLATFORM_WIDTH);
 
             if (!isOverlappingPlatform(highestX, highestY)) {
-
                 this.platforms.add(new Platform(highestX, highestY));
 
             }

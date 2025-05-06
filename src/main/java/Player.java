@@ -23,6 +23,7 @@ public class Player  {
     private Image monkeyStandingImage;
     private Image monkeyJumpingLeftImage;
     private Image monkeyJumpingRightImage;
+    private Image monkeyJumpingImage;
 
 
     public Player(int startX,int startY) {
@@ -39,6 +40,7 @@ public class Player  {
         this.monkeyStandingImage = new ImageIcon(getClass().getResource("images/monkey_standing.png")).getImage();
         this.monkeyJumpingLeftImage = new ImageIcon(getClass().getResource("images/monkey_jumping_left.png")).getImage();
         this.monkeyJumpingRightImage = new ImageIcon(getClass().getResource("images/monkey_jumping_right.png")).getImage();
+        this.monkeyJumpingImage = new ImageIcon(getClass().getResource("images/monkey.png")).getImage();
     }
 
     public void setMovingLeft(boolean moving) {
@@ -76,11 +78,16 @@ public class Player  {
         Image currentImage;
 
         if (this.isJumping) {
+            if (this.movingLeft){
 
-            currentImage = monkeyJumpingLeftImage;
+            currentImage = this.monkeyJumpingLeftImage;}
+            else if (this.movingRight) {
+                currentImage = this.monkeyJumpingRightImage;
+            }
+            else { currentImage = this.monkeyJumpingImage;}
         }
         else {
-            currentImage = monkeyStandingImage;
+            currentImage = this.monkeyStandingImage;
         }
         graphics.drawImage(currentImage, this.playerX, this.playerY, this.playerWidth, this.playerHeight, null);
     }
@@ -100,7 +107,6 @@ public class Player  {
     public int getYSpeed() {
         return ySpeed;
     }
-
 
 
     public int getPlayerWidth() {

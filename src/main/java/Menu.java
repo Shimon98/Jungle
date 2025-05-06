@@ -7,29 +7,36 @@ public class Menu extends BackgroundPanel {
     public static final int BUTTON_HEIGHT = 30;
     private JButton start;
     private JButton instructions;
+    private JPanel buttonPanel;
 
     public Menu(int x, int y, int width, int height){
         super( x,  y,  width,  height);
+        this.setBackground(new ImageIcon(getClass().getResource("images/menu.png")).getImage());
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setOpaque(false); //בלי זה לא נראה את הרקע
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.buttonPanel = new JPanel();
+        this.buttonPanel.setOpaque(false); //בלי זה לא נראה את הרקע
+        this.buttonPanel.setLayout(new BoxLayout(this.buttonPanel, BoxLayout.Y_AXIS));
+        this.buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(this.buttonPanel);
 
         this.start = new JButton("START GAME"); //יצרתי כפתורים
-        instructions = new JButton("INSTRUCTIONS");
+        this.instructions = new JButton("INSTRUCTIONS");
 
-        start.setAlignmentX(Component.CENTER_ALIGNMENT); //למרכז אותם עם ה BOXLAYOUT
-        instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.start.setAlignmentX(Component.CENTER_ALIGNMENT); //למרכז אותם עם ה BOXLAYOUT
+        this.instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        this.add(Box.createVerticalGlue()); // רווח גמיש מלמעלה
-        this.add(start);
-        this.add(Box.createRigidArea(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT))); // רווח קבוע בין הכפתורים
-        this.add(instructions);
-        this.add(Box.createVerticalGlue()); // רווח גמיש מלמטה
+        this.buttonPanel.add(Box.createVerticalGlue()); // רווח גמיש מלמעלה
 
-        this.add(buttonPanel);
+        this.buttonPanel.add(start);
+
+        this.buttonPanel.add(Box.createRigidArea(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT))); // רווח קבוע בין הכפתורים
+
+        this.buttonPanel.add(instructions);
+
+        this.buttonPanel.add(Box.createVerticalGlue()); // רווח גמיש מלמטה
+
+
 
     }
 

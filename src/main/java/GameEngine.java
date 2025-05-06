@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,21 +8,22 @@ public class GameEngine extends Thread {
     public static final int COLLISION_THRESHOLD = 15;
 
 
-
-
-
-
     private Player player;
+    private int playerStartingX;
+    private int playerStartingY;
     private List<Platform> platforms;
     private GamePanel gamePanel;
     private boolean running;
     private PlatformManager platformManager;
     private int middlePanel;
+    private int score;
+
 
 
     public GameEngine(GamePanel gamePanel, Player player) {
         this.gamePanel = gamePanel;
         this.middlePanel =gamePanel.getHeight()/2;
+
         this.player = player;
         this.platforms = new ArrayList<>();
         this.running = false;
@@ -76,7 +78,9 @@ public class GameEngine extends Thread {
         if (calculateDistance()){
             int feetLocation=this.player.getPlayerY()+this.player.getPlayerHeight();
             yDistance= this.middlePanel-feetLocation;
+
         }
+        this.score+=yDistance/2;
         this.player.setPlayerY(yDistance);
 
     }
@@ -97,6 +101,7 @@ public class GameEngine extends Thread {
             this.platformManager.generatePlatformsIfNeeded();
             playerJumpIfNeeded();
             this.gamePanel.repaint();
+            System.out.println(this.score);
 
 
             try {
@@ -129,6 +134,10 @@ public class GameEngine extends Thread {
         this.running = false;
     }
     public void startGame() {
+
         this.running = true;
+    }
+    public Player getPlayer() {
+        return player;
     }
 }

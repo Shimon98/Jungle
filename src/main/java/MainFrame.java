@@ -33,8 +33,10 @@ public class MainFrame extends JFrame {
         this.container.add(this.gamePanel, ScreenNames.GAME);
         this.gameEndPanel=new GameEndPanel(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
 
+
         this.container.add(this.gameEndPanel,ScreenNames.END_GAME);
-        menu.setStartButtonAction(e -> {
+
+        this.menu.setStartButtonAction(e -> {
             System.out.println("startPRAS");
             this.gamePanel.startGame();// הסבר למה המשחק לא מתחיל שאני לוחץ על הכפתור
             this.cardLayout.show(this.container,ScreenNames.GAME);
@@ -42,6 +44,11 @@ public class MainFrame extends JFrame {
             this.lostGame();
 
         });
+
+        this.gameEndPanel.setBackToMenuButtonAction(e->{
+            this.cardLayout.show(this.container,ScreenNames.MENU);
+        });
+
 
 
 

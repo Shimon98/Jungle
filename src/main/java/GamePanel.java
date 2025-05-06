@@ -12,13 +12,9 @@ public class GamePanel extends BackgroundPanel{
 
     public GamePanel(int x, int y, int width, int height) {
         super(x, y, width, height);
-        this.playerStartingX=(width/2)-Player.PLAYER_WIDTH/2;
-        this.playerStartingY=(height/2)+Player.PLAYER_HEIGHT/2;
-        this.player = new Player(this.playerStartingX,this.playerStartingY);
 
         this.setFocusable(true);
         this.requestFocus();
-        this.addKeyListener(new PlayerKeyListener(this.player, this));
 
 
 
@@ -34,9 +30,14 @@ public class GamePanel extends BackgroundPanel{
     }
 
     public void startGame(){
+        this.playerStartingX=(this.getWidth()/2)-Player.PLAYER_WIDTH/2;
+        this.playerStartingY=(this.getHeight()/2)+Player.PLAYER_HEIGHT/2;
+        this.player = new Player(this.playerStartingX,this.playerStartingY);
+        this.addKeyListener(new PlayerKeyListener(this.player, this));
         this.gameEngine = new GameEngine(this, this.player);
         this.gameEngine.start();
         this.gameEngine.startGame();
+
     }
 
 
