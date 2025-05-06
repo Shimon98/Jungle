@@ -34,6 +34,7 @@ public class GamePanel extends BackgroundPanel{
         this.playerStartingY=(this.getHeight()/2)+Player.PLAYER_HEIGHT/2;
         this.player = new Player(this.playerStartingX,this.playerStartingY);
         this.addKeyListener(new PlayerKeyListener(this.player, this));
+
         this.gameEngine = new GameEngine(this, this.player);
         this.gameEngine.start();
         this.gameEngine.startGame();

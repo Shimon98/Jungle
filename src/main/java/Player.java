@@ -31,7 +31,6 @@ public class Player  {
         this.playerY = startY;
         this.playerHeight= PLAYER_HEIGHT;
         this.playerWidth= PLAYER_WIDTH;
-//        this.playerFeet=this.playerY+this.playerHeight;
         this.ySpeed = 0;
         this.movingLeft = false;
         this.movingRight = false;
@@ -40,7 +39,7 @@ public class Player  {
         this.monkeyStandingImage = new ImageIcon(getClass().getResource("images/monkey_standing.png")).getImage();
         this.monkeyJumpingLeftImage = new ImageIcon(getClass().getResource("images/monkey_jumping_left.png")).getImage();
         this.monkeyJumpingRightImage = new ImageIcon(getClass().getResource("images/monkey_jumping_right.png")).getImage();
-        this.monkeyJumpingImage = new ImageIcon(getClass().getResource("images/monkey.png")).getImage();
+        this.monkeyJumpingImage = new ImageIcon(getClass().getResource("images/jump.png")).getImage();
     }
 
     public void setMovingLeft(boolean moving) {
